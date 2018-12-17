@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace OverwatchHeroPicker
@@ -27,7 +29,8 @@ namespace OverwatchHeroPicker
 
     public class Heroes : List<Hero>
     {
-        public string FilterName { get; set; } = "No Name Given";
+        public string FilterName { get; set; }
+
 
         public void Seed()
         {

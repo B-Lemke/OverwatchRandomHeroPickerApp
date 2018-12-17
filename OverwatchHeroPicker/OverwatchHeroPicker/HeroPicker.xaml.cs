@@ -29,28 +29,30 @@ namespace OverwatchHeroPicker
 
         private void NewHero_Button_Clicked(object sender, EventArgs e)
         {
-            if(App.currentHeroes.Count > 0)
+            pickRandomHero();
+           
+        }
+
+        private void pickRandomHero()
+        {
+            if (App.currentHeroes.Count > 0)
             {
-                pickRandomHero();
+                //Get a random number within the size of the number of heroes in the current array
+                int r = App.rnd.Next(App.currentHeroes.Count);
+
+                lblName.Text = App.currentHeroes[r].Name;
+                lblRole.Text = App.currentHeroes[r].Role;
+
+                //App.currentHeroes[r].FileName
+
+                ImgHeroPortrait.Source = ImageSource.FromFile(App.currentHeroes[r].FileName);
             }
             else
             {
                 lblName.Text = "You must select at least one hero on the filter page!";
 
             }
-        }
 
-        private void pickRandomHero()
-        {
-            //Get a random number within the size of the number of heroes in the current array
-            int r = App.rnd.Next(App.currentHeroes.Count);
-
-            lblName.Text = App.currentHeroes[r].Name;
-            lblRole.Text = App.currentHeroes[r].Role;
-
-            //App.currentHeroes[r].FileName
-
-            ImgHeroPortrait.Source = ImageSource.FromFile(App.currentHeroes[r].FileName);
         }
     }
 }
