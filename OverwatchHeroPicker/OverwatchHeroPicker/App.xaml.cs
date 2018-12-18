@@ -8,11 +8,12 @@ namespace OverwatchHeroPicker
     public partial class App : Application
     {
 
-        public static Heroes roster;
-        public static Heroes currentHeroes;
+        public static Filter roster;
+        public static Filter currentHeroes;
         public static Filters filters;
+        
 
-        const string Filters_Property_Key = "filters";
+        const string Filters_Property_Key = "savedfilters";
 
 
         //Random number generator to be used throughout the app
@@ -22,22 +23,15 @@ namespace OverwatchHeroPicker
         {
             InitializeComponent();
 
-            roster = new Heroes();
+            filters = new Filters();
+
+            roster = new Filter();
             roster.FilterName = "roster";
             roster.Seed();
 
-            currentHeroes = new Heroes();
+            currentHeroes = new Filter();
             currentHeroes.FilterName = "Current heroes";
-            currentHeroes.AddRange(roster);
-
-
-            filters = new Filters();
-
-            if (filters.Count < 1)
-            {
-                filters.Add(currentHeroes);
-                filters.Add(roster);
-            }
+            currentHeroes.Seed();
 
             MainPage = new OverwatchTabbedPage();
         }
@@ -68,7 +62,7 @@ namespace OverwatchHeroPicker
 
             if (Application.Current.Properties.ContainsKey(Filters_Property_Key))
             {
-                filters.Clear();
+                App.filters.Clear();
 
 
                 string json = Application.Current.Properties[Filters_Property_Key] as string;
@@ -77,15 +71,13 @@ namespace OverwatchHeroPicker
                 {
                     Filters savedFilters = Newtonsoft.Json.JsonConvert.DeserializeObject<Filters>(json);
 
-                    filters.AddRange(savedFilters);
+                    App.filters.AddRange(savedFilters);
                 }
             }
         }
 
         public static void SaveFiltersToProperties()
         {
-            string testing = filters[0].FilterName;
-
             string json = Newtonsoft.Json.JsonConvert.SerializeObject(filters);
 
             Application.Current.Properties[Filters_Property_Key] = json;

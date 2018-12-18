@@ -20,11 +20,9 @@ namespace OverwatchHeroPicker
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
+            ImgHeroPortrait.IsVisible = true;
 
             pickRandomHero();
-
-
         }
 
         private void NewHero_Button_Clicked(object sender, EventArgs e)
@@ -35,22 +33,22 @@ namespace OverwatchHeroPicker
 
         private void pickRandomHero()
         {
-            if (App.currentHeroes.Count > 0)
+            if (App.currentHeroes.HeroList.Count > 0)
             {
                 //Get a random number within the size of the number of heroes in the current array
-                int r = App.rnd.Next(App.currentHeroes.Count);
+                int r = App.rnd.Next(App.currentHeroes.HeroList.Count);
 
-                lblName.Text = App.currentHeroes[r].Name;
-                lblRole.Text = App.currentHeroes[r].Role;
+                lblName.Text = App.currentHeroes.HeroList[r].Name;
+                lblRole.Text = App.currentHeroes.HeroList[r].Role;
 
-                //App.currentHeroes[r].FileName
 
-                ImgHeroPortrait.Source = ImageSource.FromFile(App.currentHeroes[r].FileName);
+                ImgHeroPortrait.Source = ImageSource.FromFile(App.currentHeroes.HeroList[r].FileName);
             }
             else
             {
                 lblName.Text = "You must select at least one hero on the filter page!";
-
+                ImgHeroPortrait.IsVisible = false;
+                lblRole.Text = String.Empty;
             }
 
         }

@@ -23,110 +23,115 @@ namespace OverwatchHeroPicker
         {
 
         }
-
-
     }
 
-    public class Heroes : List<Hero>
+    public class Filter
     {
-        public string FilterName { get; set; }
+        public string FilterName { get; set; } = "Not Set";
 
+        public List<Hero> HeroList { get; set; }
+
+        public Filter()
+        {
+            HeroList = new List<Hero>(); //Instantiate list in constructor
+        }
 
         public void Seed()
         {
             //Popular with all of the heros
             Hero Ana = new Hero("Ana", "Support", "ana.png");
-            this.Add(Ana);
+            this.HeroList.Add(Ana);
 
             Hero Ashe = new Hero("Ashe", "Damage", "ashe.png");
-            this.Add(Ashe);
+            this.HeroList.Add(Ashe);
 
             Hero Bastion = new Hero("Bastion", "Damage", "bastion.png");
-            this.Add(Bastion);
+            this.HeroList.Add(Bastion);
 
             Hero Brigitte = new Hero("Brigitte", "Support", "brigitte.png");
-            this.Add(Brigitte);
+            this.HeroList.Add(Brigitte);
 
             Hero Dva = new Hero("D.va", "Tank", "dva.png");
-            this.Add(Dva);
+            this.HeroList.Add(Dva);
 
             Hero Doomfist = new Hero("Doomfist", "Damage", "doomfist.png");
-            this.Add(Doomfist);
+            this.HeroList.Add(Doomfist);
 
             Hero Genji = new Hero("Genji", "Damage", "genji.png");
-            this.Add(Genji);
+            this.HeroList.Add(Genji);
 
             Hero Hanzo = new Hero("Hanzo", "Damage", "hanzo.png");
-            this.Add(Hanzo);
+            this.HeroList.Add(Hanzo);
 
             Hero Junkrat = new Hero("Junkrat", "Damage", "junkrat.png");
-            this.Add(Junkrat);
+            this.HeroList.Add(Junkrat);
 
             Hero Lucio = new Hero("Lucio", "Support", "lucio.png");
-            this.Add(Lucio);
+            this.HeroList.Add(Lucio);
 
             Hero Mccree = new Hero("McCree", "Damage", "mccree.png");
-            this.Add(Mccree);
+            this.HeroList.Add(Mccree);
 
             Hero Mei = new Hero("Mei", "Damage", "mei.png");
-            this.Add(Mei);
+            this.HeroList.Add(Mei);
 
             Hero Mercy = new Hero("Mercy", "Support", "mercy.png");
-            this.Add(Mercy);
+            this.HeroList.Add(Mercy);
 
             Hero Moira = new Hero("Moira", "Support", "moira.png");
-            this.Add(Moira);
+            this.HeroList.Add(Moira);
 
             Hero Orisa = new Hero("Orisa", "Tank", "orisa.png");
-            this.Add(Orisa);
+            this.HeroList.Add(Orisa);
 
             Hero Pharah = new Hero("Pharah", "Damage", "pharah.png");
-            this.Add(Pharah);
+            this.HeroList.Add(Pharah);
 
             Hero Reaper = new Hero("Reaper", "Damage", "reaper.png");
-            this.Add(Reaper);
+            this.HeroList.Add(Reaper);
 
             Hero Reinhardt = new Hero("Reinhardt", "Tank", "reinhardt.png");
-            this.Add(Reinhardt);
+            this.HeroList.Add(Reinhardt);
 
             Hero Roadhog = new Hero("Roadhog", "Tank", "roadhog.png");
-            this.Add(Roadhog);
+            this.HeroList.Add(Roadhog);
 
             Hero Soldier = new Hero("Soldier 76", "Damage", "soldier.png");
-            this.Add(Soldier);
+            this.HeroList.Add(Soldier);
 
             Hero Sombra = new Hero("Sombra", "Damage", "sombra.png");
-            this.Add(Sombra);
+            this.HeroList.Add(Sombra);
 
             Hero Symmetra = new Hero("Symmetra", "Damage", "symmetra.png");
-            this.Add(Symmetra);
+            this.HeroList.Add(Symmetra);
 
             Hero Torb = new Hero("Torbjörn", "Damage", "torb.png");
-            this.Add(Torb);
+            this.HeroList.Add(Torb);
 
             Hero Tracer = new Hero("Tracer", "Damage", "tracer.png");
-            this.Add(Tracer);
+            this.HeroList.Add(Tracer);
 
             Hero Widowmaker = new Hero("Widowmaker", "Damage", "widowmaker.png");
-            this.Add(Widowmaker);
+            this.HeroList.Add(Widowmaker);
 
             Hero Winston = new Hero("Winston", "Tank", "winston.png");
-            this.Add(Winston);
+            this.HeroList.Add(Winston);
 
             Hero Wreckingball = new Hero("Wrecking Ball", "Tank", "wreckingball.png");
-            this.Add(Wreckingball);
+            this.HeroList.Add(Wreckingball);
 
             Hero Zarya = new Hero("Zarya", "Tank", "zarya.png");
-            this.Add(Zarya);
+            this.HeroList.Add(Zarya);
 
             Hero Zenyatta = new Hero("Zenyatta", "Support", "zenyatta.png");
-            this.Add(Zenyatta);
+            this.HeroList.Add(Zenyatta);
 
         }
     }
 
-    public class Filters : List<Heroes>
+    public class Filters : List<Filter>
     {
 
     }
+
 }

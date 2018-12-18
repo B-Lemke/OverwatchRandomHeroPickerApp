@@ -5,16 +5,9 @@ using Xamarin.Forms;
 
 namespace OverwatchHeroPicker
 {
-    class FilterButton : Button
+    public class FilterButton : Button
     {
-        public Heroes Filter { get; set; }
-
-
-
-        public void setCustomFilter()
-        {
-            App.currentHeroes = this.Filter;
-        }
+        public Filter BtnFilter { get; set; }
 
     }
 

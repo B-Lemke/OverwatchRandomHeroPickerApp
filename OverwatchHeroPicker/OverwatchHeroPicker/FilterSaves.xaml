@@ -13,16 +13,17 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <Label Text="Saved Filters" Grid.Row="0"/>
+                <Label Text="Saved Filters" Grid.Row="0" FontSize="Large"/>
                 <Grid x:Name="GridFilterSaves" Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                 </Grid>
-                <Label Text="New Filter Name:" Grid.Row="3" />
-                <Entry x:Name="txtFilterName" Grid.Row="3"/>
-                <Button Text="Save Current Current Filter" Grid.Row="4" Clicked="SaveFilter_Button_Clicked"/>
+                
+                <Label Text="New Filter Name:" Grid.Row="3" FontSize="Medium"/>
+                <Entry x:Name="txtFilterName" Grid.Row="3" Margin="10"/>
+                <Button Text="Save Current Filter" Grid.Row="4" Clicked="SaveFilter_Button_Clicked"/>
             </Grid>
         </ScrollView>
     </ContentPage.Content>

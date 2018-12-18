@@ -29,6 +29,10 @@ namespace OverwatchHeroPicker
 
                 base.OnAppearing();
 
+                //refresh the master hero list
+                App.roster.HeroList.Clear();
+                App.roster.Seed();
+
                 //Kill all children
                 GridTank.Children.Clear();
                 GridDamage.Children.Clear();
@@ -39,7 +43,7 @@ namespace OverwatchHeroPicker
                 GridSupport.RowDefinitions.Clear();
 
                 //Generate 
-                foreach (Hero hero in App.roster)
+                foreach (Hero hero in App.roster.HeroList)
                 {
                     if (hero.Role == "Tank")
                     {
@@ -55,7 +59,7 @@ namespace OverwatchHeroPicker
                         switchControl.VerticalOptions = LayoutOptions.Center;
 
                         //If the hero is previously selected, set the switch to true
-                        if (App.currentHeroes.Contains(hero))
+                        if (App.currentHeroes.HeroList.Any(x=>x.Name == hero.Name))
                         {
                             switchControl.IsToggled = true;
                         }
@@ -85,8 +89,10 @@ namespace OverwatchHeroPicker
                         switchControl.HeroName = hero.Name;
                         switchControl.VerticalOptions = LayoutOptions.Center;
 
+
+
                         //If the hero is currently selected, set the switch to true
-                        if (App.currentHeroes.Contains(hero))
+                        if (App.currentHeroes.HeroList.Any(x => x.Name == hero.Name))
                         {
                             switchControl.IsToggled = true;
                         }
@@ -117,7 +123,7 @@ namespace OverwatchHeroPicker
                         GridSupport.Children.Add(switchControl, 0, supportCount);
 
                         //If the hero is currently selected, set the switch to true
-                        if (App.currentHeroes.Contains(hero))
+                        if (App.currentHeroes.HeroList.Any(x => x.Name == hero.Name))
                         {
                             switchControl.IsToggled = true;
                         }
@@ -149,7 +155,7 @@ namespace OverwatchHeroPicker
                 base.OnDisappearing();
 
                 //Clear out the currentHeroes
-                App.currentHeroes.Clear();
+                App.currentHeroes.HeroList.Clear();
 
                 //Go through each switch in tanks 
                 foreach (DataSwitch dataSwitch in  GridTank.Children.OfType<DataSwitch>())
@@ -187,10 +193,10 @@ namespace OverwatchHeroPicker
             if (selected)
             {
                 //Look up the hero in the roster that's assosciated with this switch
-                Hero hero = App.roster.First(item => item.Name.Equals(dataSwitch.HeroName));
+                Hero hero = App.roster.HeroList.First(item => item.Name.Equals(dataSwitch.HeroName));
 
                 //Add the hero to the current heros.
-                App.currentHeroes.Add(hero);
+                App.currentHeroes.HeroList.Add(hero);
             }
         }
 

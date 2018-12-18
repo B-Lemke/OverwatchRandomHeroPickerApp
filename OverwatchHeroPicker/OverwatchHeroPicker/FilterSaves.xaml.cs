@@ -30,7 +30,7 @@ namespace OverwatchHeroPicker
             int filterCount = 0;
 
             //Generate 
-            foreach (Heroes filter in App.filters)
+            foreach (Filter filter in App.filters)
             {
                     //for each filter, we need to create a row definition and add it into the grid
 
@@ -42,9 +42,9 @@ namespace OverwatchHeroPicker
                     //Add an X button
                     FilterButton buttonDelete = new FilterButton();
                     buttonDelete.Text = "X";
-                    buttonDelete.Filter = new Heroes();
-                    buttonDelete.Filter.AddRange(filter);
-                    buttonDelete.Filter.FilterName = filter.FilterName;
+                    buttonDelete.BtnFilter = new Filter();
+                    buttonDelete.BtnFilter.HeroList.AddRange(filter.HeroList);
+                    buttonDelete.BtnFilter.FilterName = filter.FilterName;
 
                     //Set the click event handler to change the current heroes to the filter they selecte
                     buttonDelete.Clicked += new EventHandler(deleteButton_Clicked);
@@ -55,10 +55,12 @@ namespace OverwatchHeroPicker
                     //Add the button with the name
                     FilterButton fb = new FilterButton();
                     fb.Text = filter.FilterName;
+   
 
                     //Instantiate and set the filter.
-                    fb.Filter = new Heroes();
-                    fb.Filter.AddRange(filter);
+                    fb.BtnFilter = new Filter();
+                    fb.BtnFilter.HeroList.AddRange(filter.HeroList);
+                    fb.BtnFilter.FilterName = filter.FilterName;
 
                     //Set the click event handler to change the current heroes to the filter they selecte
                     fb.Clicked += new EventHandler(filterButton_Clicked);
@@ -74,9 +76,9 @@ namespace OverwatchHeroPicker
         private void SaveFilter_Button_Clicked(object sender, EventArgs e)
         {
             //Create a new filter, add it to the filters
-            Heroes newFilter = new Heroes();
+            Filter newFilter = new Filter();
             newFilter.FilterName = txtFilterName.Text;
-            newFilter.AddRange(App.currentHeroes);
+            newFilter.HeroList.AddRange(App.currentHeroes.HeroList);
 
             App.filters.Add(newFilter);
 
@@ -93,9 +95,9 @@ namespace OverwatchHeroPicker
             //Add an X button
             FilterButton buttonDelete = new FilterButton();
             buttonDelete.Text = "X";
-            buttonDelete.Filter = new Heroes();
-            buttonDelete.Filter.AddRange(newFilter);
-            buttonDelete.Filter.FilterName = newFilter.FilterName;
+            buttonDelete.BtnFilter = new Filter();
+            buttonDelete.BtnFilter.HeroList.AddRange(newFilter.HeroList);
+            buttonDelete.BtnFilter.FilterName = newFilter.FilterName;
 
 
             //Set the click event handler to change the current heroes to the filter they selecte
@@ -108,21 +110,25 @@ namespace OverwatchHeroPicker
             fb.Text = newFilter.FilterName;
 
             //Instantiate and set the filter.
-            fb.Filter = new Heroes();
-            fb.Filter.AddRange(newFilter);
+            fb.BtnFilter = new Filter();
+            fb.BtnFilter.HeroList.AddRange(newFilter.HeroList);
+            fb.BtnFilter.FilterName = newFilter.FilterName;
 
             //Set the click event handler to change the current heroes to the filter they select.
             fb.Clicked += new EventHandler(filterButton_Clicked);
 
             GridFilterSaves.Children.Add(fb, 1, rowNum);
+
+            //Save changes to properties
+            App.SaveFiltersToProperties();
         }
 
         private void filterButton_Clicked(object sender, EventArgs e)
         {
             //set the filter based off the the filter button's 
             FilterButton fb = (FilterButton)sender;
-            App.currentHeroes.Clear();
-            App.currentHeroes.AddRange(fb.Filter);
+            App.currentHeroes.HeroList.Clear();
+            App.currentHeroes.HeroList.AddRange(fb.BtnFilter.HeroList);
 
             //Switch tab page.
             var parentPage = this.Parent as TabbedPage;
@@ -136,7 +142,7 @@ namespace OverwatchHeroPicker
             FilterButton fb = (FilterButton)sender;
 
             //Find the first filter in the app's filter list with this filter name and delete it, then remove it from the list.
-            App.filters.Remove(App.filters.Where(filter => filter.FilterName == fb.Filter.FilterName).FirstOrDefault());
+            App.filters.Remove(App.filters.Where(filter => filter.FilterName == fb.BtnFilter.FilterName).FirstOrDefault());
 
 
 
@@ -154,6 +160,9 @@ namespace OverwatchHeroPicker
             }
             GridFilterSaves.RowDefinitions.RemoveAt(GridFilterSaves.RowDefinitions.Count - 1);
 
+
+            //Save changes to properties
+            App.SaveFiltersToProperties();
         }
 
     }
